@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:paz="using:Avalonia.Controls.PanAndZoom"
+             xmlns:vm="using:Olsthoorn.DesktopUI.ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Olsthoorn.DesktopUI.Views.Pages.CanvasPage">
+
+	<UserControl.Resources>
+		<VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+			<VisualBrush.Visual>
+				<Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="#FFF0F0F0" />
+			</VisualBrush.Visual>
+		</VisualBrush>
+	</UserControl.Resources>
+
+	<Panel Background="Transparent">
+		<Panel Background="#FFF5F5F5" />
+		<Panel Background="{DynamicResource TemplateCheckerBoard}" />
+		<Panel ClipToBounds="True">
+			<paz:ZoomBorder Name="ZoomBorder"
+							Stretch="None"
+							ZoomSpeed="1.5"
+							PanButton="Middle"
+							EnablePan="True"
+							EnableZoom="True"
+							Background="Transparent"
+							ClipToBounds="True"
+							VerticalAlignment="Stretch"
+							HorizontalAlignment="Stretch">
+
+				<ItemsControl Items="{Binding CanvasPage.Lines}">
+
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Canvas Background="LightGray"
+									Width="{Binding CanvasPage.Width}"
+									Height="{Binding CanvasPage.Height}">
+								<Canvas.RenderTransform>
+									<TransformGroup>
+										<MatrixTransform Matrix="1 0 0 -1 0 0" />
+									</TransformGroup>
+								</Canvas.RenderTransform>
+							</Canvas>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+
+					<ItemsControl.DataTemplates>
+						<DataTemplate DataType="vm:LineViewModel">
+
+							<Line StartPoint="{Binding Start}"
+								  EndPoint="{Binding End}"
+								  Stroke="Black" StrokeThickness="20">
+
+							</Line>
+						</DataTemplate>
+					</ItemsControl.DataTemplates>
+				</ItemsControl>
+			</paz:ZoomBorder>
+		</Panel>
+	</Panel>
+</UserControl>

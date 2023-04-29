@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Olsthoorn.DesktopUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1350" d:DesignHeight="700"
+        xmlns:pages="using:Olsthoorn.DesktopUI.Views.Pages"
+        x:Class="Olsthoorn.DesktopUI.Views.MainView"
+        FontSize="14"
+        Foreground="{StaticResource SystemBaseHighColor}">
+
+	<!-- Like this its fine -->
+	<!--<Panel>
+		<TabControl x:Name="TabControl" Classes="sidebar" Margin="0 40 0 20">
+			<TabItem Header="Create grid">
+				<pages:CanvasPage Margin="0 0 50 0"/>
+			</TabItem>
+		</TabControl>
+	</Panel>-->
+
+	<!-- In the grid the canvas does not resize -->
+	<Grid ColumnDefinitions="250,*,100" RowDefinitions="50,*,50">
+		<Panel Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray">			
+			<Label>Top Menu</Label>
+		</Panel>
+
+		<Panel Grid.Row="1" Grid.Column="0" Background="Gray">
+			<Label>Left Menu</Label>
+		</Panel>
+
+		<Panel Grid.Row="1" Grid.Column="1">
+			<pages:CanvasPage ></pages:CanvasPage>
+		</Panel>
+
+		<Panel Grid.Row="1" Grid.Column="2" Background="LightYellow">
+			<Label>Right Menu</Label>
+		</Panel>
+
+		<Panel Grid.Row="3" Grid.ColumnSpan="3"  Background="LightGreen">
+			<Label>Bottom Menu</Label>
+		</Panel>
+	</Grid>
+</UserControl>
